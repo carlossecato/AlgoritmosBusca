@@ -2,21 +2,16 @@
 #include <stdlib.h>
 
 
-long long int *mergeSort(long long int *vetor, long long int posicaoInicio, long long int posicaoFim);
-void imprime (long long int *c, long long int tam, int opcao);
-long long int *criavet(long long int tam);
-
-
-long long int *mergeSort(long long int *vetor, long long int posicaoInicio, long long int posicaoFim) {
-   long long int i, j, k, metadeTamanho, *vetorTemp;
+int *mergeSort(int *vetor, int posicaoInicio, int posicaoFim) {
+int i, j, k, metadeTamanho, *vetorTemp;
     
-    //printf("entrei no merg\n");
+    
 
     if(posicaoInicio == posicaoFim) return NULL;
 
     // ordenacao recursiva das duas metades
     metadeTamanho = (posicaoInicio + posicaoFim ) / 2;
-    //printf("dividi o veto\n");
+    
     mergeSort(vetor, posicaoInicio, metadeTamanho);
     mergeSort(vetor, metadeTamanho + 1, posicaoFim);
 
@@ -25,7 +20,7 @@ long long int *mergeSort(long long int *vetor, long long int posicaoInicio, long
     j = metadeTamanho + 1;
     k = 0;
 
-    vetorTemp = (long long int*) malloc(sizeof(long long int) * (posicaoFim - posicaoInicio + 1));
+    vetorTemp = (int*) malloc(sizeof(int) * (posicaoFim - posicaoInicio + 1));
     if(vetorTemp == NULL){
         printf("Erro alocacao \n");
     }
@@ -65,24 +60,24 @@ return vetor;
 }
 
 
-void imprime (long long int *c, long long int tam, int opcao){
-	long long int i;
+void imprime_merge (int *c, int tam, int opcao){
+	int i;
 	if(opcao==0){
 	for(i=0;i<tam;i++){
-		printf("%llu ", c[i]);
+		printf("%d ", c[i]);
 	}
     }
     else{
         for (i = tam -1; i >= 0; i--)
         {
-           printf("%llu ", c[i]);
+           printf("%d ", c[i]);
         }
     }
 }
 	
-long long int *criavet(long long int tam){
-        long long int *vetor;
-    vetor=(long long int*)malloc(tam*sizeof(long long int));
+int *criavet(int tam){
+        int *vetor;
+    vetor=(int*)malloc(tam*sizeof(int));
         if(!vetor){
             printf("Erro na alocacao");
     }
@@ -91,27 +86,3 @@ long long int *criavet(long long int tam){
 
 
 
-int main ()
-{
-    long long int *vetor,*c=NULL;    
-    long long int tam, posicaoInicio, posicaoFim;
-    long long int i;
-    int opcao;
-    
-    
-    //printf("Digite o tamanho do vetor: ");
-    scanf("%llu",&tam);
-    vetor = criavet(tam);
-    scanf("%d", &opcao);
-
-    for (i = 0; i < tam; i++ ) {
-        scanf("%llu", &vetor[i]);
-    }
-
-    posicaoInicio=0;
-    posicaoFim = tam-1;
-
-    
-    c=mergeSort(vetor, posicaoInicio, posicaoFim);
-    imprime(c, tam, opcao);
-}

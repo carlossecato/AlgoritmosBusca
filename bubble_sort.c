@@ -23,7 +23,7 @@ void bubbleSort(int *p, int tam){
     }
 } 
 
-void imprime(int *p, int tam, int opcao){
+void imprime_bubble(int *p, int tam, int opcao){
     int i;
 
     if(opcao==0){
@@ -52,21 +52,3 @@ int *geravet(int tam){
 }   
 
 
-int main()
-{
-    int tam, opcao;
-    int *p;
-
-    scanf("%d", &tam);
-    scanf("%d", &opcao);
-    
-    p = geravet(tam);
-
-    for (int i = 0; i < tam; i++)
-    {
-        scanf("%d", &p[i]);
-    }
-    bubbleSort(p,tam);
-
-    imprime(p,tam,opcao);
-}
