@@ -20,8 +20,8 @@ void inserir(Lista *L, elem *X, int *erro){
 	
 	if(L->inicio == NULL)
 		L->inicio = p;
-		else L->fim->prox = p;
-		
+	else L->fim->prox = p;
+
 	L->fim = p;
 	
 }
@@ -45,7 +45,7 @@ int tamanho_rec(no *p){
 	
 	if(p==NULL)
 		return 0;
-		else return(1+tamanho_rec(p->prox));
+	else return(1+tamanho_rec(p->prox));
 	
 }
 
@@ -79,7 +79,7 @@ int esta_na_lista(Lista *L, elem *X){
 	
 	if(p==NULL)
 		return 0;
-		else return 1;
+	else return 1;
 	
 }
 
@@ -87,28 +87,38 @@ int esta_na_lista_rec(no *p, elem *X){
 	
 	if(p == NULL)
 		return 0;
-		else if (p->info==*X)
-			return 1;
-			else 
-				return esta_na_lista_rec(p->prox,X);
-		
+	else if (p->info==*X)
+		return 1;
+	else 
+		return esta_na_lista_rec(p->prox,X);
+
 }
 
-void eliminar_rec(Lista *L, no* anterior, no* atual, elem *X, int *erro){
+int eliminar(Lista *L, elem *X){
 	
-	if(atual == NULL)
-		*erro = 1;
-	else if(atual->info == *X){
-		if(atual == L->inicio){
-			L->inicio = L->inicio->prox;
-			if(L->inicio == NULL)
-				L->fim = NULL;
-		} else if(atual == L->fim){
-			L->fim = anterior;
-			L->fim->prox = NULL;		
-		} else anterior->prox = atual->prox;
-		free(atual);
-		*erro = 0;
-	}else eliminar_rec(L, atual, atual->prox, X, erro);
-	
+	no *p, *aux;
+	int teste = 0;
+
+	p = L->inicio;
+	while ((p!=NULL) && (!teste)) {
+		if (p->info == *X) {
+			if (p == L->inicio)
+				L->inicio = L->inicio->prox;
+			else if (p == L->fim) {	
+				L->fim = aux;
+				L->fim->prox = NULL;
+
+			}
+			else aux->prox = p->prox;
+			free(p);
+			teste = 1;
+			return 1;
+		}
+		else {
+			aux = p;
+			p = p->prox;
+		}
+
+	}
+	return 0;     
 }
