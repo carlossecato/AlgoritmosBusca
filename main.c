@@ -25,7 +25,7 @@ elem *geraListaOrdDecr(Lista *L, int N){
 	elem *p;
 	p = (elem*)calloc(N,sizeof(elem));
 	for(i=N;i>0;i--){
-		 
+
 		p[j++]= N*i;
 		inserir(L,&p[i],&erro);
 
@@ -62,34 +62,34 @@ void calculaAleatorio (Lista *L, int *p, int N, int R){
 	int aux,i; 
 	double somaMerge, somaInsertion, somaBubble;
 
-	printf("\n   >>> Dados Aleatorios <<<   \n\n");
+	printf("\n   \t\t>>> Dados Aleatorios <<<   \n\n");
 
 	tempoMerge = (clock_t*)calloc(R,sizeof(clock_t));
 	tempoInsertion = (clock_t*)calloc(R,sizeof(clock_t));
 	tempoBubble = (clock_t*)calloc(R,sizeof(clock_t));
 
-	for(i=0; i<R; i++){
 	aux =N-1;
-	p = geraListaAleatoria(L,N);
-	init = clock();
-	mergeSort(p,0,aux);
-	end = clock();
-	tempoMerge[i] = (end-init);
-	//printf("Merge: %lf \n", (double)tempoMerge);
+	for(i=0; i<R; i++){
+		p = geraListaAleatoria(L,N);
+		init = clock();
+		mergeSort(p,0,aux);
+		end = clock();
+		tempoMerge[i] = (end-init);///CLOCKS_PER_SEC;
 
-	p = geraListaAleatoria(L,N);
-	init = clock();
-	insertion_sort(p,N);
-	end = clock();
-	tempoInsertion[i] = (end-init);
-	//printf("Insertion: %lf \n", (double)tempoInsertion);
 
-	p = geraListaAleatoria(L,N);
-	init = clock();
-	bubbleSort(p,N);
-	end = clock();
-	tempoBubble[i] = (end-init);
-	//printf("Bubble: %lf\n", (double )tempoBubble);
+		p = geraListaAleatoria(L,N);
+		init = clock();
+		insertion_sort(p,N);
+		end = clock();
+		tempoInsertion[i] = (end-init);///CLOCKS_PER_SEC;
+
+
+		p = geraListaAleatoria(L,N);
+		init = clock();
+		bubbleSort(p,N);
+		end = clock();
+		tempoBubble[i] = (end-init);//CLOCKS_PER_SEC;
+
 	}
 
 	for(i=0;i<R;i++){
@@ -97,67 +97,76 @@ void calculaAleatorio (Lista *L, int *p, int N, int R){
 		somaInsertion += tempoInsertion[i];
 		somaBubble += tempoBubble[i];
 	}	
-		
-		somaMerge = somaMerge/R; 
-		somaInsertion = somaInsertion/R;
-		somaBubble = somaBubble/R;
+
+	somaMerge = somaMerge/R; 
+	somaInsertion = somaInsertion/R;
+	somaBubble = somaBubble/R;
 
 
-	printf("Merge: %lf\n",somaMerge);
-	printf("Insertion: %lf\n",somaInsertion);
-	printf("Bubble: %lf\n",somaBubble);
+	printf("Merge:  \t%.2lf milisegundos  \t%.2lf segundos\n",somaMerge,somaMerge/CLOCKS_PER_SEC);
+	printf("Insertion: \t%.2lf milisegundos \t%.2lf segundos\n",somaInsertion, somaInsertion/CLOCKS_PER_SEC);
+	printf("Bubble: \t%.2lf milisegundos \t%.2lf segundos\n",somaBubble, somaBubble/CLOCKS_PER_SEC);
+
+	free(tempoMerge);
+	free(tempoInsertion);
+	free(tempoBubble);
 }
 
 void calculaCresc (Lista *L, int *p, int N, int R){
 	clock_t init,end; 
-	clock_t *tempoMerge, *tempoInsertion, *tempoBubble;
+	clock_t *tempoMergeCresc, *tempoInsertionCresc, *tempoBubbleCresc;
 	int aux,i; 
-	double somaMerge, somaInsertion, somaBubble;
+	double somaMergeCresc, somaInsertionCresc, somaBubbleCresc;
 
-	printf("\n   >>> Dados em Ordem Crescente <<<   \n\n");
+	printf("\n   \t>>> Dados em Ordem Crescente <<<   \n\n");
 
-	tempoMerge = (clock_t*)calloc(R,sizeof(clock_t));
-	tempoInsertion = (clock_t*)calloc(R,sizeof(clock_t));
-	tempoBubble = (clock_t*)calloc(R,sizeof(clock_t));
+	tempoMergeCresc = (clock_t*)calloc(R,sizeof(clock_t));
+	tempoInsertionCresc = (clock_t*)calloc(R,sizeof(clock_t));
+	tempoBubbleCresc = (clock_t*)calloc(R,sizeof(clock_t));
 
-	for(i=0; i<R; i++){
 	aux =N-1;
-	p = geraListaOrdCres(L,N);
-	init = clock();
-	mergeSort(p,0,aux);
-	end = clock();
-	tempoMerge[i] = (end-init)/CLOCKS_PER_SEC;
-	//printf("Merge: %lf \n", (double)tempoMerge);
+	for(i=0; i<R; i++){
+		p = geraListaOrdCres(L,N);
+		
+		init = clock();
+		mergeSort(p,0,aux);
+		end = clock();
+		tempoMergeCresc[i] = (end-init);///CLOCKS_PER_SEC;
 
-	p = geraListaOrdCres(L,N);
-	init = clock();
-	insertion_sort(p,N);
-	end = clock();
-	tempoInsertion[i] = (end-init)/CLOCKS_PER_SEC;
-	//printf("Insertion: %lf \n", (double)tempoInsertion);
 
-	p = geraListaOrdCres(L,N);
-	init = clock();
-	bubbleSort(p,N);
-	end = clock();
-	tempoBubble[i] = (end-init)/CLOCKS_PER_SEC;
-	//printf("Bubble: %lf\n", (double )tempoBubble);
+		p = geraListaOrdCres(L,N);
+		init = clock();
+		insertion_sort(p,N);
+		end = clock();
+		tempoInsertionCresc[i] = (end-init);///CLOCKS_PER_SEC;
+
+
+		p = geraListaOrdCres(L,N);
+		init = clock();
+		bubbleSort(p,N);
+		end = clock();
+		tempoBubbleCresc[i] = (end-init);///CLOCKS_PER_SEC;
+
 	}
 
 	for(i=0;i<R;i++){
-		somaMerge += tempoMerge[i];
-		somaInsertion += tempoInsertion[i];
-		somaBubble += tempoBubble[i];
+		somaMergeCresc += tempoMergeCresc[i];
+		somaInsertionCresc += tempoInsertionCresc[i];
+		somaBubbleCresc += tempoBubbleCresc[i];
 	}	
-		
-		somaMerge = somaMerge/R; 
-		somaInsertion = somaInsertion/R;
-		somaBubble = somaBubble/R;
+
+	somaMergeCresc = somaMergeCresc/R; 
+	somaInsertionCresc = somaInsertionCresc/R;
+	somaBubbleCresc = somaBubbleCresc/R;
 
 
-	printf("Merge: %lf\n",somaMerge);
-	printf("Insertion: %lf\n",somaInsertion);
-	printf("Bubble: %lf\n",somaBubble);
+	printf("Merge:  \t%.2lf milisegundos  \t%.2lf segundos\n",somaMergeCresc, somaMergeCresc/CLOCKS_PER_SEC);
+	printf("Insertion: \t%.2lf milisegundos \t%.2lf segundos\n",somaInsertionCresc, somaInsertionCresc/CLOCKS_PER_SEC);
+	printf("Bubble: \t%.2lf milisegundos \t%.2lf segundos\n",somaBubbleCresc, somaBubbleCresc/CLOCKS_PER_SEC);
+
+	free(tempoMergeCresc);
+	free(tempoInsertionCresc);
+	free(tempoBubbleCresc);
 }
 
 void calculaDecres (Lista *L, int *p, int N, int R){
@@ -166,34 +175,34 @@ void calculaDecres (Lista *L, int *p, int N, int R){
 	int aux,i; 
 	double somaMerge, somaInsertion, somaBubble;
 
-	printf("\n   >>> Dados em Ordem Decrescente <<<   \n\n");
+	printf("\n   \t>>> Dados em Ordem Decrescente <<<   \n\n");
 
 	tempoMerge = (clock_t*)calloc(R,sizeof(clock_t));
 	tempoInsertion = (clock_t*)calloc(R,sizeof(clock_t));
 	tempoBubble = (clock_t*)calloc(R,sizeof(clock_t));
 
-	for(i=0; i<R; i++){
 	aux =N-1;
-	p = geraListaOrdDecr(L,N);
-	init = clock();
-	mergeSort(p,0,aux);
-	end = clock();
-	tempoMerge[i] = (end-init)/CLOCKS_PER_SEC;
-	//printf("Merge: %lf \n", (double)tempoMerge);
+	for(i=0; i<R; i++){
+		p = geraListaOrdDecr(L,N);
+		init = clock();
+		mergeSort(p,0,aux);
+		end = clock();
+		tempoMerge[i] = (end-init);//CLOCKS_PER_SEC;
 
-	p = geraListaOrdDecr(L,N);
-	init = clock();
-	insertion_sort(p,N);
-	end = clock();
-	tempoInsertion[i] = (end-init)/CLOCKS_PER_SEC;
-	//printf("Insertion: %lf \n", (double)tempoInsertion);
 
-	p = geraListaOrdDecr(L,N);
-	init = clock();
-	bubbleSort(p,N);
-	end = clock();
-	tempoBubble[i] = (end-init)/CLOCKS_PER_SEC;
-	//printf("Bubble: %lf\n", (double )tempoBubble);
+		p = geraListaOrdDecr(L,N);
+		init = clock();
+		insertion_sort(p,N);
+		end = clock();
+		tempoInsertion[i] = (end-init);//CLOCKS_PER_SEC;
+
+
+		p = geraListaOrdDecr(L,N);
+		init = clock();
+		bubbleSort(p,N);
+		end = clock();
+		tempoBubble[i] = (end-init);//CLOCKS_PER_SEC;
+
 	}
 
 	for(i=0;i<R;i++){
@@ -201,21 +210,21 @@ void calculaDecres (Lista *L, int *p, int N, int R){
 		somaInsertion += tempoInsertion[i];
 		somaBubble += tempoBubble[i];
 	}	
-		
-		somaMerge = somaMerge/R; 
-		somaInsertion = somaInsertion/R;
-		somaBubble = somaBubble/R;
+
+	somaMerge = somaMerge/R; 
+	somaInsertion = somaInsertion/R;
+	somaBubble = somaBubble/R;
 
 
-	printf("Merge: %lf\n",somaMerge);
-	printf("Insertion: %lf\n",somaInsertion);
-	printf("Bubble: %lf\n",somaBubble);
+	printf("Merge:  \t%.2lf milisegundos  \t%.2lf segundos\n",somaMerge, somaMerge/CLOCKS_PER_SEC);
+	printf("Insertion: \t%.2lf milisegundos \t%.2lf segundos\n",somaInsertion, somaInsertion/CLOCKS_PER_SEC);
+	printf("Bubble: \t%.2lf milisegundos \t%.2lf segundos\n",somaBubble, somaBubble/CLOCKS_PER_SEC);
+
+	free(tempoMerge);
+	free(tempoInsertion);
+	free(tempoBubble);
 
 }
-
-
-
-
 
 int main ()
 {
@@ -245,9 +254,9 @@ int main ()
 	{
 		printf("%d ",p[i] );
 	}*/
-		calculaAleatorio(&L,p, N,R);
-		calculaCresc(&L, p, N,R);
-		calculaDecres(&L, p, N,R);
+	calculaAleatorio(&L,p, N,R);
+	calculaCresc(&L, q, N,R);
+	calculaDecres(&L, r, N,R);
 	/*
 	for(i=0;i<N;i++){
 		inserir(&L,&p[i],&erro);
