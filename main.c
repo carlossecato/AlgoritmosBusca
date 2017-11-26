@@ -127,7 +127,7 @@ void calculaCresc (Lista *L, int *p, int N, int R){
 	aux =N-1;
 	for(i=0; i<R; i++){
 		p = geraListaOrdCres(L,N);
-		
+
 		init = clock();
 		mergeSort(p,0,aux);
 		end = clock();
@@ -244,27 +244,27 @@ int main ()
 
 	printf("Digite um numero inteiro: \n");
 	scanf("%d",&N);
-	
+
 	printf("Digite o numero de repeticoes desejada: \n");
 	scanf("%d", &R);	
 
 	printf("\n\n");
 	/*p=geraListaOrdDecr(&L,N);
-	for (int i = 0; i < N; i++)
-	{
-		printf("%d ",p[i] );
-	}*/
+	  for (int i = 0; i < N; i++)
+	  {
+	  printf("%d ",p[i] );
+	  }*/
 	calculaAleatorio(&L,p, N,R);
 	calculaCresc(&L, q, N,R);
 	calculaDecres(&L, r, N,R);
 	/*
-	for(i=0;i<N;i++){
-		inserir(&L,&p[i],&erro);
-		eliminar(&L, &p[i]);
-	}
-*/
+	   for(i=0;i<N;i++){
+	   inserir(&L,&p[i],&erro);
+	   eliminar(&L, &p[i]);
+	   }
+	 */
 	//imprime(&L);
 
-	
+
 }
 
